@@ -19,7 +19,25 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Install Qt
+      uses: joshjion/install-qt-action@v2
+      with:
+        version: '5.12.11'
+        host: 'windows'
+        target: 'desktop'
+        arch: 'win64_msvc2017_64'
+        dir: '${{ github.workspace }}/3rdlibs'
+        modules: 'qtcharts qtwebengine'
+        cached: 'false'
+        setup-python: 'true'
+        set-env: 'true'
+        tools-only: 'false'
+        aqtversion: '==1.2.5'
+        py7zrversion: '==0.16.1'
+        extra: '--external 7z'
+
+    - name: Pull source code
+      uses: actions/checkout@v2
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
