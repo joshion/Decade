@@ -31,7 +31,8 @@ jobs:
         host: 'windows'
         target: 'desktop'
         arch: 'win64_msvc2017_64'
-        dir: '${{github.workspace}}/3rdlibs'
+        # Let the Qt installed on "$RUNNER_WORKSPACE (this is one folder above the starting directory)"
+        # dir: '${{github.workspace}}/3rdlibs'
         cached: 'false'
         setup-python: 'true'
         set-env: 'true'

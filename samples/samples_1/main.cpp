@@ -2,6 +2,11 @@
 
 #include "dctemplate.hpp"
 
+#include "dcmath.hpp"
+
+/*!
+ * @brief Test Singleton's Compilation
+*/
 class TestSingleton : public Singleton<TestSingleton>
 {
 friend class Singleton<TestSingleton>;
@@ -14,8 +19,18 @@ public:
     void dosomething() { std::cout << "Hello Decade." << std::endl; };
 };
 
+/*!
+ * @brief Test DcMath's Compilation
+*/
+void TestDcMathCompile()
+{
+    DcMath::Matrix4d mat;
+    mat = mat * mat;
+}
+
 int main()
 {
+    TestDcMathCompile();
     TestSingleton::instance().dosomething();
     return 0;
 }
