@@ -52,6 +52,17 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "RelWithDebInfo"
             }
+        },
+        {
+            "name": "x64-UnitTest",
+            "description": "Sets build type",
+            "inherits": [
+                "x64"
+            ],
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+                "DC_ENABLE_UNITTEST": true
+            }
         }
     ],
     "buildPresets": [
@@ -62,12 +73,16 @@
         {
             "name": "x64-Release",
             "configurePreset": "x64-Release"
+        },
+        {
+            "name": "x64-UnitTest",
+            "configurePreset": "x64-UnitTest"
         }
     ],
     "testPresets": [
         {
-            "name": "default",
-            "configurePreset": "x64-Release",
+            "name": "x64-UnitTest",
+            "configurePreset": "x64-UnitTest",
             "output": {
                 "outputOnFailure": true
             },
