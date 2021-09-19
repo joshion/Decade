@@ -71,5 +71,4 @@ jobs:
       # Execute tests defined by the CMake configuration.
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: |
-       ctest -T test --output-on-failure --stop-on-failure --no-tests=error
-
+       ctest -T test --output-on-failure --stop-on-failure --no-tests=error --config RelWithDebInfo
