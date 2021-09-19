@@ -50,7 +50,7 @@ jobs:
       run: |
         cmake -B${{github.workspace}}/build/Debug -DCMAKE_BUILD_TYPE=Debug
         cmake -B${{github.workspace}}/build/RelWithDebInfo -DCMAKE_BUILD_TYPE=RelWithDebInfo
-        cmake -B${{github.workspace}}/build/UnitTest -DCMAKE_BUILD_TYPE=RelWithDebInfo -DDC_ENABLE_UNITTEST=true
+        cmake -B${{github.workspace}}/build/UnitTest -DCMAKE_BUILD_TYPE=RelWithDebInfo -DDC_ENABLE_UNITTEST=true -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/install/UnitTest
 
     - name: Build
       # Build your program with the given configuration
