@@ -6,6 +6,8 @@
 #include <initializer_list>
 #include <exception>
 
+#include <cstring>
+
 namespace DcMath
 {
     //! A "column major mat" template class.
@@ -360,7 +362,7 @@ namespace DcMath
     protected:
         void assign(const MatrixType &other) noexcept
         {
-            memcpy_s(_data, kDataByteSize, other._data, kDataByteSize);
+            memcpy(_data, other._data, kDataByteSize);
         }
 
     private:
