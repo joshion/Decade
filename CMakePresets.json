@@ -35,7 +35,6 @@
         },
         {
             "name": "x64-Debug",
-            "description": "Sets build type",
             "inherits": [
                 "x64"
             ],
@@ -45,7 +44,6 @@
         },
         {
             "name": "x64-Release",
-            "description": "Sets build type",
             "inherits": [
                 "x64"
             ],
@@ -55,13 +53,39 @@
         },
         {
             "name": "x64-UnitTest",
-            "description": "Sets build type",
             "inherits": [
                 "x64"
             ],
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "RelWithDebInfo",
                 "DC_ENABLE_UNITTEST": true
+            }
+        },
+        {
+            "name": "Apple-Base",
+            "description": "Default build using Ninja generator",
+            "hidden": true,
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/out/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+            }
+        },
+        {
+            "name": "Apple-M2",
+            "hidden": false,
+            "inherits": [
+                "Apple-Base"
+            ],
+            "architecture": {
+                "value": "arm64",
+                "strategy": "external"
+            },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++"
             }
         }
     ],
@@ -77,12 +101,27 @@
         {
             "name": "x64-UnitTest",
             "configurePreset": "x64-UnitTest"
+        },
+        {
+            "name": "Apple-M2",
+            "configurePreset": "Apple-M2"
         }
     ],
     "testPresets": [
         {
             "name": "x64-UnitTest",
             "configurePreset": "x64-UnitTest",
+            "output": {
+                "outputOnFailure": true
+            },
+            "execution": {
+                "noTestsAction": "error",
+                "stopOnFailure": true
+            }
+        },
+        {
+            "name": "Apple-M2",
+            "configurePreset": "Apple-M2",
             "output": {
                 "outputOnFailure": true
             },
