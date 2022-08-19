@@ -13,13 +13,11 @@
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/out/build/${presetName}",
             "cacheVariables": {
-                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
-                "CMAKE_PREFIX_PATH": "C:/Qt/Qt5.12.11/5.12.11/msvc2017_64"
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
             }
         },
         {
-            "name": "x64",
-            "description": "Sets x64 arch, compilers",
+            "name": "Win-x64",
             "hidden": true,
             "inherits": [
                 "Ninja"
@@ -30,31 +28,33 @@
             },
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "cl",
-                "CMAKE_CXX_COMPILER": "cl"
+                "CMAKE_CXX_COMPILER": "cl",
+                "CMAKE_PREFIX_PATH": "C:/Qt/Qt5.12.11/5.12.11/msvc2017_64",
+                "DC_ENABLE_QT": true
             }
         },
         {
-            "name": "x64-Debug",
+            "name": "Win-x64-Debug",
             "inherits": [
-                "x64"
+                "Win-x64"
             ],
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug"
             }
         },
         {
-            "name": "x64-Release",
+            "name": "Win-x64-Release",
             "inherits": [
-                "x64"
+                "Win-x64"
             ],
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "RelWithDebInfo"
             }
         },
         {
-            "name": "x64-UnitTest",
+            "name": "Win-x64-UnitTest",
             "inherits": [
-                "x64"
+                "Win-x64"
             ],
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "RelWithDebInfo",
@@ -63,17 +63,18 @@
         },
         {
             "name": "Apple-Base",
-            "description": "Default build using Ninja generator",
             "hidden": true,
-            "generator": "Ninja",
-            "binaryDir": "${sourceDir}/out/build/${presetName}",
+            "inherits": [
+                "Ninja"
+            ],
             "cacheVariables": {
-                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++"
             }
         },
         {
             "name": "Apple-M2",
-            "hidden": false,
             "inherits": [
                 "Apple-Base"
             ],
@@ -82,35 +83,50 @@
                 "strategy": "external"
             },
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug",
-                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-                "CMAKE_C_COMPILER": "clang",
-                "CMAKE_CXX_COMPILER": "clang++"
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "Apple-M2-UnitTest",
+            "inherits": [
+                "Apple-Base"
+            ],
+            "architecture": {
+                "value": "arm64",
+                "strategy": "external"
+            },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+                "DC_ENABLE_UNITTEST": true
             }
         }
     ],
     "buildPresets": [
         {
-            "name": "x64-Debug",
-            "configurePreset": "x64-Debug"
+            "name": "Win-x64-Debug",
+            "configurePreset": "Win-x64-Debug"
         },
         {
-            "name": "x64-Release",
-            "configurePreset": "x64-Release"
+            "name": "Win-x64-Release",
+            "configurePreset": "Win-x64-Release"
         },
         {
-            "name": "x64-UnitTest",
-            "configurePreset": "x64-UnitTest"
+            "name": "Win-x64-UnitTest",
+            "configurePreset": "Win-x64-UnitTest"
         },
         {
             "name": "Apple-M2",
             "configurePreset": "Apple-M2"
+        },
+        {
+            "name": "Apple-M2-UnitTest",
+            "configurePreset": "Apple-M2-UnitTest"
         }
     ],
     "testPresets": [
         {
-            "name": "x64-UnitTest",
-            "configurePreset": "x64-UnitTest",
+            "name": "Win-x64-UnitTest",
+            "configurePreset": "Win-x64-UnitTest",
             "output": {
                 "outputOnFailure": true
             },
@@ -120,8 +136,8 @@
             }
         },
         {
-            "name": "Apple-M2",
-            "configurePreset": "Apple-M2",
+            "name": "Apple-M2-UnitTest",
+            "configurePreset": "Apple-M2-UnitTest",
             "output": {
                 "outputOnFailure": true
             },

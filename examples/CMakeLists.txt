@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.19)
 
 project(samples)
 
-if(WIN32)
+if(DC_ENABLE_QT)
     add_subdirectory(test_qt_env)
 endif()
-add_subdirectory(samples_1)
+add_subdirectory(dceg_1)
+add_subdirectory(dceg_2)

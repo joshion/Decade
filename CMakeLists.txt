@@ -8,7 +8,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(DC_3RDLIBS_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/3rdlibs)
 
-add_subdirectory(samples)
+add_subdirectory(examples)
 add_subdirectory(src)
 if (DC_ENABLE_UNITTEST)
     enable_testing()
