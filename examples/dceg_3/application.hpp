@@ -1,5 +1,7 @@
 #pragma once
 
+#include <thread>
+
 namespace DC
 {
 
@@ -10,8 +12,12 @@ namespace DC
         ~Application();
     public:
         int exec();
-    protected:
+        std::thread::id mainThreadID();
         virtual int run() = 0;
+    private:
+        std::thread::id _mainThreadID;
     };
 
 } // namespace DC
+
+extern DC::Application *dcApp;

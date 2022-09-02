@@ -4,7 +4,6 @@
 
 #include <list>
 #include <chrono>
-#include <thread>
 
 using namespace DC;
 
@@ -67,5 +66,10 @@ bool DC::postCommnad(const CommandPtr& pCommand)
 
 bool DC::sendCommand(const CommandPtr& pCommand)
 {
+    auto threadID = std::this_thread::get_id();
+    if (threadID == dcApp->mainThreadID())
+    {
+        pCommand->run();
+    }
     return true;
 }
